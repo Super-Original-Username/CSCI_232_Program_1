@@ -11,13 +11,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Main {
     public static void foo() {
         System.out.println("Oh boi here I come!");
     }
     private Charset charset = Charset.forName("US-ASCII");
-    private int[] huffCodes;
+    private String[] huffCodes = new String[255];
+    private int[] freq = new int[255];
+    private String line;
 
     private Path file = Paths.get("/input/input.txt");
     // Sorry if this relative path doesn't work. It's always been iffy for me with intellij
@@ -27,8 +30,20 @@ public class Main {
 
     }
 
+    public void makeQueue(){
+        PriorityQueue q = new PriorityQueue(255);
+        for(int i = 0; i < freq.length;i++){
+            q.add(freq[i]);
+        }
+    }
+
     public void countChars(){
         try(BufferedReader read = Files.newBufferedReader(file, charset)){
+            while((line = read.readLine())!=null){
+                for(int i = 0; i < line.length();i++){
+                   freq[(int)line.charAt(i)] += 1;
+                }
+            }
         }catch(IOException x){
             System.err.format("IOException %s%n",x);
         }
