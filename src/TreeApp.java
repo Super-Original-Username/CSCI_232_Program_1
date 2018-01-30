@@ -32,7 +32,16 @@ class Tree {
 	public Tree() {                    // constructor
 		root = null;                   // no nodes in tree yet
 	}
-	
+
+	public void setRootRight(Node r) {
+		Node parent;
+		root.rightChild = r;
+	}
+	public void setRootLeft(Node l){
+		root.leftChild = l;
+	}
+	public void setParentToRoot(Node n){
+	}
 	
 	public Node find(int key) {      // find node with given key
 		Node current = root;         // (assumes non-empty tree)
@@ -62,7 +71,7 @@ class Tree {
 			root = newNode;
 		}
 		else {                        // root occupied
-			Node current = root;      // start at root  
+			Node current = root;      // start at root
 			Node parent;
 			while (true) {            // exits internally			
 				parent = current;  

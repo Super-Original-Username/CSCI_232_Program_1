@@ -23,7 +23,7 @@ public class Main {
     private int[] freq = new int[255];
     private String line;
 
-    private Path file = Paths.get("/input/input.txt");
+    private Path file = Paths.get("input/input.txt");
     // Sorry if this relative path doesn't work. It's always been iffy for me with intellij
     // If it doesn't work, feel free to paste in the hard path for the input file
 
@@ -49,7 +49,21 @@ public class Main {
     public void buildTree(PriorityQueue queue) {
         while (queue.peek() != null) {
             Tree t = new Tree();
+            Node root = new Node();
+            Node l = (Node)queue.peek();
+            queue.remove();
+            Node r = (Node)queue.peek();
+            queue.remove();
+            int fTot = (int)(l.dData+r.dData);
+            root.dData = fTot;
+            root.leftChild = l;
+            root.rightChild = r;
+            t.insert(0,fTot);
+            t.setRootLeft(l);
+            t.setRootRight(r);
+            t.displayTree();
         }
+
     }
 
     public void countChars() {
@@ -64,15 +78,16 @@ public class Main {
         }
     }
 
-    public void Start() {
+    public void start() {
         countChars();
-
+        makeQueue();
     }
 
     public static void main(String[] args) {
-        Tree huff = new Tree(); // Initializes the tree that will be used to generate the Huffman Code
-        PriorityQueue q = new PriorityQueue();
-        foo();
+        //Tree huff = new Tree(); // Initializes the tree that will be used to generate the Huffman Code
+        //PriorityQueue q = new PriorityQueue();
+        //foo();
+        new Main().start();
     }
 
 }
