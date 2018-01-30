@@ -35,6 +35,13 @@ public class Main {
         for(int i = 0; i < freq.length;i++){
             q.add(freq[i]);
         }
+        buildTree(q);
+    }
+
+    public void buildTree(PriorityQueue queue){
+        while(queue.peek() != null){
+
+        }
     }
 
     public void countChars(){
