@@ -17,6 +17,7 @@ public class Main {
     public static void foo() {
         System.out.println("Oh boi here I come!");
     }
+
     private Charset charset = Charset.forName("US-ASCII");
     private String[] huffCodes = new String[255];
     private int[] freq = new int[255];
@@ -30,29 +31,36 @@ public class Main {
 
     }
 
-    public void makeQueue(){
+    // Takes the frequency array and feeds any characters with a frequency greater than 0 into the PriorityQueue
+    public void makeQueue() {
         PriorityQueue q = new PriorityQueue(255);
-        for(int i = 0; i < freq.length;i++){
-            q.add(freq[i]);
+        for (int i = 0; i < freq.length; i++) {
+            if (freq[i] > 0) {
+                Node n = new Node();
+                n.iData = i;
+                n.dData = freq[i];
+                q.add(n);
+            }
         }
         buildTree(q);
     }
 
-    public void buildTree(PriorityQueue queue){
-        while(queue.peek() != null){
-
+    // Takes an input of a PriorityQueue and converts it into a Huffman Tree
+    public void buildTree(PriorityQueue queue) {
+        while (queue.peek() != null) {
+            Tree t = new Tree();
         }
     }
 
-    public void countChars(){
-        try(BufferedReader read = Files.newBufferedReader(file, charset)){
-            while((line = read.readLine())!=null){
-                for(int i = 0; i < line.length();i++){
-                   freq[(int)line.charAt(i)] += 1;
+    public void countChars() {
+        try (BufferedReader read = Files.newBufferedReader(file, charset)) {
+            while ((line = read.readLine()) != null) {
+                for (int i = 0; i < line.length(); i++) {
+                    freq[(int) line.charAt(i)] += 1;
                 }
             }
-        }catch(IOException x){
-            System.err.format("IOException %s%n",x);
+        } catch (IOException x) {
+            System.err.format("IOException %s%n", x);
         }
     }
 
