@@ -23,7 +23,7 @@ public class Main{
     private String[] huffCodes = new String[255];
     private int[] freq = new int[255];
     private String line;
-    private Node t;
+    private Tree t;
 
     private Path file = Paths.get("input/input.txt");
     // Sorry if this relative path doesn't work. It's always been iffy for me with intellij
@@ -45,20 +45,20 @@ public class Main{
                 q.add(n);
             }
         }
-        t = buildTree(q);
+        t = new Tree(buildTree(q));
     }
 
     // Takes an input of a PriorityQueue and converts it into a Huffman Tree
     public Node buildTree(PriorityQueue queue) {
         while (queue.size() > 1) {
-            Node.printData((Node)queue.poll());
-            /*Node root = new Node();
+            //Node.printData((Node)queue.poll());
+            Node root = new Node();
             Node l = (Node) queue.poll();
             Node r = (Node) queue.poll();
             int fTot = (int)(l.freq+r.freq);
             root.freq = fTot;
             root.leftChild = l;
-            root.rightChild = r;*/
+            root.rightChild = r;
         }
         return (Node) queue.poll();
     }
@@ -78,6 +78,7 @@ public class Main{
     public void start() {
         countChars();
         makeQueue();
+        t.displayTree();
     }
 
     public static void main(String[] args) {
