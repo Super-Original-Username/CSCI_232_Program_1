@@ -22,6 +22,10 @@ class Node implements Comparable<Node> {
 
     }
 
+    public static void printData(Node n){
+        System.out.println(n.cha+" "+n.freq);
+    }
+
     public Node(int i, double f, Node rChild, Node lChild) {
         iData = i + 1; // Adjusts char to actual value. I'm also leaving it as an int that is then cast to char, so I don't have to change any of the other tree code
         cha = (char) iData; // takes the value of iData and casts it back into a char
