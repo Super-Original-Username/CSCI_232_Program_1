@@ -59,6 +59,7 @@ public class Main{
             root.freq = fTot;
             root.leftChild = l;
             root.rightChild = r;
+            queue.add(root);
         }
         return (Node) queue.poll();
     }
