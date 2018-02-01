@@ -53,6 +53,8 @@ class Tree {
         root = null;                   // no nodes in tree yet
     }
 
+    public Tree(Node n){ root = n;}
+
     public void setRootRight(Node r) {
         Node parent;
         root.rightChild = r;
