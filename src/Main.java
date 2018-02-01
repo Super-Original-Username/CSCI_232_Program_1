@@ -10,10 +10,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class Main {
+public class Main{
     public static void foo() {
         System.out.println("Oh boi here I come!");
     }
@@ -31,14 +32,15 @@ public class Main {
 
     }
 
+
+
+
     // Takes the frequency array and feeds any characters with a frequency greater than 0 into the PriorityQueue
     public void makeQueue() {
-        PriorityQueue q = new PriorityQueue(255);
+        PriorityQueue<Node> q = new PriorityQueue(255);
         for (int i = 0; i < freq.length; i++) {
             if (freq[i] > 0) {
-                Node n = new Node();
-                n.iData = i;
-                n.dData = freq[i];
+                Node n = new Node(i,freq[i],null,null);
                 q.add(n);
             }
         }
@@ -47,21 +49,14 @@ public class Main {
 
     // Takes an input of a PriorityQueue and converts it into a Huffman Tree
     public void buildTree(PriorityQueue queue) {
-        while (queue.peek() != null) {
-            Tree t = new Tree();
+        while (queue.size() > 1) {
             Node root = new Node();
-            Node l = (Node)queue.peek();
-            queue.remove();
-            Node r = (Node)queue.peek();
-            queue.remove();
-            int fTot = (int)(l.dData+r.dData);
-            root.dData = fTot;
+            Node l = (Node)queue.remove();
+            Node r = (Node)queue.remove();
+            int fTot = (int)(l.freq+r.freq);
+            root.freq = fTot;
             root.leftChild = l;
             root.rightChild = r;
-            t.insert(0,fTot);
-            t.setRootLeft(l);
-            t.setRootRight(r);
-            t.displayTree();
         }
 
     }
@@ -70,7 +65,7 @@ public class Main {
         try (BufferedReader read = Files.newBufferedReader(file, charset)) {
             while ((line = read.readLine()) != null) {
                 for (int i = 0; i < line.length(); i++) {
-                    freq[(int) line.charAt(i)] += 1;
+                    freq[(int) line.charAt(i)-1] += 1;
                 }
             }
         } catch (IOException x) {
