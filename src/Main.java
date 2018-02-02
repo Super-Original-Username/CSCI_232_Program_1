@@ -101,7 +101,7 @@ public class Main {
             if (n.isLeaf()) {
                 System.out.print(n.cha);
                 n = t.getRoot();
-            } else if (encoded.charAt(i) == '0') {
+            }if (encoded.charAt(i) == '0') {
                 n = n.leftChild;
             } else if (encoded.charAt(i) == '1') {
                 n = n.rightChild;
