@@ -20,6 +20,7 @@ public class Main {
     private String line;
     private Tree t;
     private String code = "";
+    private String encoded;
 
     private Path file = Paths.get("input/input.txt");
     // Sorry if this relative path doesn't work. It's always been iffy for me with intellij
@@ -79,12 +80,18 @@ public class Main {
         }
     }
 
-    public void encode(){
+    public void encode() {
         String temp;
-        try (BufferedReader read = Files.newBufferedReader(file,charset)){
-
-        }catch (IOException x){
-            System.err.format("IOException %s%n",x);
+        try (BufferedReader read = Files.newBufferedReader(file, charset)) {
+            while ((line = read.readLine()) != null) {
+                for (int i = 0; i < line.length(); i++) {
+                    encoded += huffCodes[(int) line.charAt(i)];
+                }
+            }
+            System.out.println(encoded);
+            read.close();
+        } catch (IOException x) {
+            System.err.format("IOException %s%n", x);
         }
     }
 
@@ -93,6 +100,7 @@ public class Main {
         makeQueue();
         // t.displayTree(); // Apparently the treeApp program wasn't really designed to display unbalanced trees, it becomes super unclear at around level 3 of the tree
         makeTable(huffCodes, code, t.getRoot());
+        encode();
     }
 
     public static void main(String[] args) {
