@@ -95,6 +95,19 @@ public class Main {
         }
     }
 
+    public void decode() {
+        Node n = t.getRoot();
+        for (int i = 0; i < encoded.length(); i++) {
+            if (n.isLeaf()) {
+                System.out.print(n.cha);
+                n = t.getRoot();
+            } else if (encoded.charAt(i) == '0') {
+                n = n.leftChild;
+            } else if (encoded.charAt(i) == '1') {
+                n = n.rightChild;
+            }
+        }
+    }
 
 
     public void start() {
@@ -103,6 +116,7 @@ public class Main {
         //t.displayTree(); // Apparently the treeApp program wasn't really designed to display unbalanced trees, it becomes super unclear at around level 3 of the tree
         makeTable(huffCodes, code, t.getRoot());
         encode();
+        decode();
     }
 
     public static void main(String[] args) {
