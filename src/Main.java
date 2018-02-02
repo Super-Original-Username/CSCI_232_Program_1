@@ -20,7 +20,7 @@ public class Main {
     private String line;
     private Tree t;
     private String code = "";
-    private String encoded;
+    private String encoded = "";
 
     private Path file = Paths.get("input/input.txt");
     // Sorry if this relative path doesn't work. It's always been iffy for me with intellij
