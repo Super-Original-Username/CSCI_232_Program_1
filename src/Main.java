@@ -103,10 +103,6 @@ public class Main {
         try(BufferedWriter writer = Files.newBufferedWriter(outFile,charset)) {
             for (int i = 0; i < encoded.length(); i++) {
                 if (n.isLeaf()) {
-                    if(n.cha=='\n'){
-                        System.out.println();
-                        writer.write('\n');
-                    }
                     System.out.print(n.cha);
                     writer.write(n.cha);
                     n = t.getRoot();
