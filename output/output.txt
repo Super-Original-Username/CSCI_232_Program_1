@@ -1,1 +1,1 @@
-Yeah, so we're gonna need to eventually come up with a decent input file to test this program with that's still short enough tomake a handwritten code table/tree. Let's just use this for the time being
+dogs do notspot hot pot

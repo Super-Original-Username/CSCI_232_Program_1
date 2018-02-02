@@ -117,13 +117,14 @@ public class Main {
                     n = n.rightChild;
                 }
             }
+            System.out.println(n.cha);
         }catch(IOException x){
             System.err.format("IOException %s%n",x);
         }
     }
 
     public void printTable(){
-        System.out.println("Character,  Frequency,  Code");
+        System.out.println("\nCharacter,  Frequency,  Code");
         for(int i = 0; i < huffCodes.length ;i++){
             if(freq[i]!=0){
                 System.out.println(((char) i) + "     "+freq[i]+",    "+huffCodes[i]);
