@@ -73,8 +73,18 @@ public class Main {
                     freq[(int) line.charAt(i) - 1] += 1;
                 }
             }
+            read.close();
         } catch (IOException x) {
             System.err.format("IOException %s%n", x);
+        }
+    }
+
+    public void encode(){
+        String temp;
+        try (BufferedReader read = Files.newBufferedReader(file,charset)){
+
+        }catch (IOException x){
+            System.err.format("IOException %s%n",x);
         }
     }
 
