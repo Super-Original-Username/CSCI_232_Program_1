@@ -73,6 +73,7 @@ public class Main {
                 for (int i = 0; i < line.length(); i++) {
                     freq[(int) line.charAt(i)] += 1;
                 }
+                freq[(int)'\n'] +=1;
             }
             read.close();
         } catch (IOException x) {
