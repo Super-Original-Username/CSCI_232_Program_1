@@ -27,9 +27,11 @@ class Node implements Comparable<Node> {
     }
 
     public Node(int i, double f, Node rChild, Node lChild) {
-        iData = i + 1; // Adjusts char to actual value. I'm also leaving it as an int that is then cast to char, so I don't have to change any of the other tree code
+        iData = i;
         cha = (char) iData; // takes the value of iData and casts it back into a char
         freq = f;
+        leftChild = lChild;
+        rightChild = rChild;
     }
 
     public boolean isLeaf() { // Checks if the node is a leaf
@@ -55,16 +57,8 @@ class Tree {
 
     public Tree(Node n){ root = n;}
 
-    public void setRootRight(Node r) {
-        Node parent;
-        root.rightChild = r;
-    }
-
-    public void setRootLeft(Node l) {
-        root.leftChild = l;
-    }
-
-    public void setParentToRoot(Node n) {
+    public Node getRoot(){
+        return root;
     }
 
     public Node find(int key) {      // find node with given key

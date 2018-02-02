@@ -10,38 +10,32 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
-public class Main{
-    public static void foo() {
-        System.out.println("Oh boi here I come!");
-    }
+public class Main {
 
     private Charset charset = Charset.forName("US-ASCII");
-    private String[] huffCodes = new String[255];
-    private int[] freq = new int[255];
+    private String[] huffCodes = new String[256];
+    private int[] freq = new int[256];
     private String line;
     private Tree t;
+    private String code = "";
 
     private Path file = Paths.get("input/input.txt");
     // Sorry if this relative path doesn't work. It's always been iffy for me with intellij
-    // If it doesn't work, feel free to paste in the hard path for the input file
+    // If it doesn't work, feel free to paste in the full path for the input file
 
     public Main() {
 
     }
 
 
-
-
     // Takes the frequency array and feeds any characters with a frequency greater than 0 into the PriorityQueue
     public void makeQueue() {
-        PriorityQueue<Node> q = new PriorityQueue(255);
+        PriorityQueue<Node> q = new PriorityQueue(256);
         for (int i = 0; i < freq.length; i++) {
             if (freq[i] > 0) {
-                Node n = new Node(i,freq[i],null,null);
+                Node n = new Node(i, freq[i], null, null);
                 q.add(n);
             }
         }
@@ -55,7 +49,7 @@ public class Main{
             Node root = new Node();
             Node l = (Node) queue.poll();
             Node r = (Node) queue.poll();
-            int fTot = (int)(l.freq+r.freq);
+            int fTot = (int) (l.freq + r.freq);
             root.freq = fTot;
             root.leftChild = l;
             root.rightChild = r;
@@ -64,11 +58,19 @@ public class Main{
         return (Node) queue.poll();
     }
 
+    public void makeTable(String[] tab, String s, Node n) {
+        if (!n.isLeaf()) {
+            makeTable(tab, s + '0', n.leftChild);
+            makeTable(tab, s + '1', n.rightChild);
+        } else
+            tab[n.cha] = s;
+    }
+
     public void countChars() {
         try (BufferedReader read = Files.newBufferedReader(file, charset)) {
             while ((line = read.readLine()) != null) {
                 for (int i = 0; i < line.length(); i++) {
-                    freq[(int) line.charAt(i)-1] += 1;
+                    freq[(int) line.charAt(i) - 1] += 1;
                 }
             }
         } catch (IOException x) {
@@ -79,13 +81,11 @@ public class Main{
     public void start() {
         countChars();
         makeQueue();
-        t.displayTree();
+        // t.displayTree(); // Apparently the treeApp program wasn't really designed to display unbalanced trees, it becomes super unclear at around level 3 of the tree
+        makeTable(huffCodes, code, t.getRoot());
     }
 
     public static void main(String[] args) {
-        //Tree huff = new Tree(); // Initializes the tree that will be used to generate the Huffman Code
-        //PriorityQueue q = new PriorityQueue();
-        //foo();
         new Main().start();
     }
 
