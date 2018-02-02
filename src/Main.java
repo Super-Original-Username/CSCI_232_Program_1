@@ -105,6 +105,7 @@ public class Main {
                 if (n.isLeaf()) {
                     if(n.cha=='\n'){
                         System.out.println();
+                        writer.write('\n');
                     }
                     System.out.print(n.cha);
                     writer.write(n.cha);
