@@ -71,7 +71,7 @@ public class Main {
         try (BufferedReader read = Files.newBufferedReader(file, charset)) {
             while ((line = read.readLine()) != null) {
                 for (int i = 0; i < line.length(); i++) {
-                    freq[(int) line.charAt(i) - 1] += 1;
+                    freq[(int) line.charAt(i)] += 1;
                 }
             }
             read.close();
