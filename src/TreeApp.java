@@ -271,7 +271,7 @@ class Tree {
             while (globalStack.isEmpty() == false) {
                 Node temp = (Node) globalStack.pop();
                 if (temp != null) {
-                    System.out.print((int)temp.freq);
+                    System.out.print((char)temp.cha+(int)temp.freq);
                     localStack.push(temp.leftChild);
                     localStack.push(temp.rightChild);
                     if (temp.leftChild != null ||

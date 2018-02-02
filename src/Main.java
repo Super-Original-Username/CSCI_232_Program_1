@@ -95,10 +95,12 @@ public class Main {
         }
     }
 
+
+
     public void start() {
         countChars();
         makeQueue();
-        // t.displayTree(); // Apparently the treeApp program wasn't really designed to display unbalanced trees, it becomes super unclear at around level 3 of the tree
+        //t.displayTree(); // Apparently the treeApp program wasn't really designed to display unbalanced trees, it becomes super unclear at around level 3 of the tree
         makeTable(huffCodes, code, t.getRoot());
         encode();
     }
