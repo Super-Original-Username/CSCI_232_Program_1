@@ -90,7 +90,9 @@ public class Main {
                 for (int i = 0; i < line.length(); i++) {
                     encoded += huffCodes[(int) line.charAt(i)];
                 }
+                encoded += huffCodes[10];
             }
+            encoded = encoded.substring(0, encoded.length()-huffCodes[10].length());
             System.out.println(encoded);
             read.close();
         } catch (IOException x) {
@@ -109,8 +111,8 @@ public class Main {
                     n = n.rightChild;
                 }
                 if (n.isLeaf()) {
-                    System.out.print(n.cha);
-                    writer.write(n.cha);
+                    System.out.print((char)n.iData);
+                    writer.write((char)n.iData);
                     n = t.getRoot();
                 }
             }
