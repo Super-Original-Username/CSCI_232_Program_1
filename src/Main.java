@@ -5,6 +5,7 @@
 * */
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -23,6 +24,7 @@ public class Main {
     private String encoded = "";
 
     private Path file = Paths.get("input/input.txt");
+    private Path outFile = Paths.get("output/output.txt");
     // Sorry if this relative path doesn't work. It's always been iffy for me with intellij
     // If it doesn't work, feel free to paste in the full path for the input file
 
@@ -98,15 +100,24 @@ public class Main {
 
     public void decode() {
         Node n = t.getRoot();
-        for (int i = 0; i < encoded.length(); i++) {
-            if (n.isLeaf()) {
-                System.out.print(n.cha);
-                n = t.getRoot();
-            }if (encoded.charAt(i) == '0') {
-                n = n.leftChild;
-            } else if (encoded.charAt(i) == '1') {
-                n = n.rightChild;
+        try(BufferedWriter writer = Files.newBufferedWriter(outFile,charset)) {
+            for (int i = 0; i < encoded.length(); i++) {
+                if (n.isLeaf()) {
+                    if(n.cha=='\n'){
+                        System.out.println();
+                    }
+                    System.out.print(n.cha);
+                    writer.write(n.cha);
+                    n = t.getRoot();
+                }
+                if (encoded.charAt(i) == '0') {
+                    n = n.leftChild;
+                } else if (encoded.charAt(i) == '1') {
+                    n = n.rightChild;
+                }
             }
+        }catch(IOException x){
+            System.err.format("IOException %s%n",x);
         }
     }
 
