@@ -102,18 +102,18 @@ public class Main {
         Node n = t.getRoot();
         try(BufferedWriter writer = Files.newBufferedWriter(outFile,charset)) {
             for (int i = 0; i < encoded.length(); i++) {
-                if (n.isLeaf()) {
-                    System.out.print(n.cha);
-                    writer.write(n.cha);
-                    n = t.getRoot();
-                }
+
                 if (encoded.charAt(i) == '0') {
                     n = n.leftChild;
                 } else if (encoded.charAt(i) == '1') {
                     n = n.rightChild;
                 }
+                if (n.isLeaf()) {
+                    System.out.print(n.cha);
+                    writer.write(n.cha);
+                    n = t.getRoot();
+                }
             }
-            System.out.println(n.cha);
         }catch(IOException x){
             System.err.format("IOException %s%n",x);
         }
