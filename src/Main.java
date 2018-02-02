@@ -1,6 +1,6 @@
 /*
-* Authors: Alex, Ethan, Zan
-*
+* Authors: Alex Salois, Ethan Fison, Zan Rost-Montieth
+* 2/2/2018
 * Overview: Huffman Code generating/decoding algorithm. CSCI 232 Assignment 1
 * */
 
@@ -15,8 +15,8 @@ import java.util.PriorityQueue;
 
 public class Main {
 
-    private Charset charset = Charset.forName("US-ASCII");
-    private String[] huffCodes = new String[256];
+    private Charset charset = Charset.forName("US-ASCII"); // Declaration of the character set
+    private String[] huffCodes = new String[256]; // String array to hold huffman codes associated with characters
     private int[] freq = new int[256];
     private String line;
     private Tree t;
@@ -61,7 +61,7 @@ public class Main {
         return (Node) queue.poll();
     }
 
-    public void makeTable(String[] tab, String s, Node n) {
+    public void makeTable(String[] tab, String s, Node n) { // Recursively moves through the huffman tree and generates the codes for each character
         if (!n.isLeaf()) {
             makeTable(tab, s + '0', n.leftChild);
             makeTable(tab, s + '1', n.rightChild);
@@ -69,7 +69,7 @@ public class Main {
             tab[n.cha] = s;
     }
 
-    public void countChars() {
+    public void countChars() { // Reads the input line by line, counts the frequency of each character
         try (BufferedReader read = Files.newBufferedReader(file, charset)) {
             while ((line = read.readLine()) != null) {
                 for (int i = 0; i < line.length(); i++) {
@@ -83,7 +83,7 @@ public class Main {
         }
     }
 
-    public void encode() {
+    public void encode() { // Reads the input file, then replaces each character with its huffman code
         String temp;
         try (BufferedReader read = Files.newBufferedReader(file, charset)) {
             while ((line = read.readLine()) != null) {
@@ -92,7 +92,7 @@ public class Main {
                 }
                 encoded += huffCodes[10];
             }
-            encoded = encoded.substring(0, encoded.length()-huffCodes[10].length());
+            encoded = encoded.substring(0, encoded.length()-huffCodes[10].length()); // Shortens the string to remove the code for a final newline
             System.out.println(encoded);
             read.close();
         } catch (IOException x) {
@@ -100,7 +100,7 @@ public class Main {
         }
     }
 
-    public void decode() {
+    public void decode() { // Reads the encoded text, and navigates the tree to convert huffman codes back into their original characters
         Node n = t.getRoot();
         try(BufferedWriter writer = Files.newBufferedWriter(outFile,charset)) {
             for (int i = 0; i < encoded.length(); i++) {
@@ -121,7 +121,7 @@ public class Main {
         }
     }
 
-    public void printTable(){
+    public void printTable(){ // Iterates through the frequency and code tables, then prints them to the console
         System.out.println("\nCharacter,  Frequency,  Code");
         for(int i = 0; i < huffCodes.length ;i++){
             if(freq[i]!=0){
@@ -132,7 +132,7 @@ public class Main {
     }
 
 
-    public void start() {
+    public void start() { // Starts the method calls of the program for an instance of the main class
         countChars();
         makeQueue();
         //t.displayTree(); // Apparently the treeApp program wasn't really designed to display unbalanced trees, it becomes super unclear at around level 3 of the tree
