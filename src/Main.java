@@ -122,6 +122,16 @@ public class Main {
         }
     }
 
+    public void printTable(){
+        System.out.println("Character,  Frequency,  Code");
+        for(int i = 0; i < huffCodes.length ;i++){
+            if(freq[i]!=0){
+                System.out.println(((char) i) + "     "+freq[i]+",    "+huffCodes[i]);
+            }
+
+        }
+    }
+
 
     public void start() {
         countChars();
@@ -130,6 +140,7 @@ public class Main {
         makeTable(huffCodes, code, t.getRoot());
         encode();
         decode();
+        printTable();
     }
 
     public static void main(String[] args) {
